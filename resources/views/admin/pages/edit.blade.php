@@ -60,6 +60,25 @@
                                     </div>
                                 </div>
 
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="fv-row mb-7 fv-plugins-icon-container">
+                                            <label class="fs-6 fw-semibold form-label mt-3 me-5">
+                                                <span>Image</span> :
+                                            </label>
+                                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_1">
+                                                Ajouter
+                                            </button>
+                                            @error('image')
+                                            <div class="fv-plugins-message-container invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                @include('admin.pages.modals.image')
+
                                 @if(!empty($page->type) && !in_array($page->type, $options['options_disabled']['content']))
                                     <div class="row">
                                         <div class="col">
