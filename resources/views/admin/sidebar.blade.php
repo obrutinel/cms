@@ -32,6 +32,10 @@
 
                     <div data-kt-menu-trigger="click" class="menu-item here menu-accordion {{ !empty($page) && $page->type == 'home' ? 'show' : '' }}">
 
+
+                        {{--<x-nav-item name="Paramètres" :route="route('pages.edit', 1)" :active="$page->type">
+                        <x-nav-subitem name="Paramètres" :route="route('pages.edit', 1)" :active="$page->type">--}}
+
                         <span class="menu-link py-2">
                               <span class="menu-icon">
                                 <i class="fa-solid fa-home"></i>
@@ -50,7 +54,7 @@
                             </div>
 
                             <div class="menu-item">
-                                <a  href="{{ route('pages.list', 'slide') }}" class="menu-link {{ request()->routeIs('settings*') ? 'active' : '' }} py-2">
+                                <a  href="{{ route('pages.list', 'slide') }}" class="menu-link {{ !empty($page) && $page->slide == 'slide' ? 'active' : '' }} py-2">
                                     <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
                                     <span class="menu-title">Slider</span>
                                 </a>

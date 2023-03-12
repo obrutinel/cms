@@ -23,9 +23,11 @@ class PageController extends Controller
         ]);
     }
 
-    public function create(Request $request): View
+    public function create(string $type = null): View
     {
-        return view('admin.pages.create');
+        return view('admin.pages.edit', [
+            'type' => $type
+        ]);
     }
 
     public function store(Request $request): RedirectResponse
@@ -33,6 +35,7 @@ class PageController extends Controller
         $validatedData = $request->validate([
             'title' => 'required',
             'content' => 'sometimes',
+            'type' => 'sometimes',
             'is_publish' => 'sometimes|boolean',
             'slug' => 'sometimes|max:255|unique:pages',
         ]);
@@ -43,14 +46,15 @@ class PageController extends Controller
 
         Page::create($validatedData);
 
-        return redirect()->route('pages.index')
+        return redirect()->route('pages.list', $request->get('type'))
             ->with('success', 'La page a bien été ajoutée');
     }
 
     public function edit(int $id): View
     {
         return view('admin.pages.edit', [
-            'page' => Page::findOrFail($id)
+            'page' => Page::findOrFail($id),
+            'options' => config('cms')
         ]);
     }
 
@@ -74,7 +78,7 @@ class PageController extends Controller
         $page->save();
 
         if($request->save == 'exit') {
-            return redirect()->route('pages.index')
+            return redirect()->route('pages.list', $page->type)
                 ->with('success', 'La page a bien été modifiée');
         }
 

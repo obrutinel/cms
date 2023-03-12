@@ -25,9 +25,18 @@
 @section('content')
     <div class="col-xl-12">
 
-            <form method="POST" action="{{ route('pages.update', $page) }}">
-                @csrf
+        <div class="card mb-5 mb-xl-8">
+
+            @if(empty($page))
+                <form method="POST" action="{{ route('pages.store') }}">
+            @else
+                <form method="POST" action="{{ route('pages.update', $page) }}">
                 @method('PUT')
+               @endif
+
+            @csrf
+
+                <input type="hidden" name="type" value="{{ !empty($type)?$type:$page->type }}">
 
                 <div class="row">
                     <div class="col-md-8">
@@ -41,7 +50,7 @@
                                             <label class="fs-6 fw-semibold form-label mt-3">
                                                 <span class="required">Titre</span> :
                                             </label>
-                                            <input type="text" class="form-control form-control-solid" name="title" value="{{ $page->title }}">
+                                            <input type="text" class="form-control form-control-solid" name="title" value="{{ old('title', empty($page) ? '' : $page->title) }}">
                                             @error('title')
                                                 <div class="fv-plugins-message-container invalid-feedback">
                                                     {{ $message }}
@@ -51,17 +60,19 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="fv-row mb-7 fv-plugins-icon-container">
-                                            <label class="fs-6 fw-semibold form-label mt-3">
-                                                <span>Contenu</span> :
-                                            </label>
-                                            <textarea class="form-control form-control-solid tiny" name="content" rows="10">{{ $page->content }}</textarea>
-                                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                                @if(!empty($page->type) && !in_array($page->type, $options['options_disabled']['content']))
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="fv-row mb-7 fv-plugins-icon-container">
+                                                <label class="fs-6 fw-semibold form-label mt-3">
+                                                    <span>Contenu</span> :
+                                                </label>
+                                                <textarea class="form-control form-control-solid tiny" name="content" rows="10">{{ old('content', empty($page) ? '' : $page->content) }}</textarea>
+                                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
 
                             </div>
                         </div>
@@ -94,7 +105,7 @@
                                 <div class="row">
                                     <div class="col mt-3 mb-7">
                                         <div class="form-check form-switch form-check-custom form-check-solid">
-                                            <input class="form-check-input" name="is_publish" type="checkbox" value="1" @checked($page->is_publish) />
+                                            <input class="form-check-input" name="is_publish" type="checkbox" value="1" @checked(empty($page)??$page->is_publish) />
                                             <label class="form-check-label" for="flexSwitchDefault">
                                                 Publier
                                             </label>
@@ -102,21 +113,24 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="fv-row mb-7 fv-plugins-icon-container">
-                                            <label class="fs-6 fw-semibold form-label mt-3">
-                                                <span class="required">Slug</span> :
-                                            </label>
-                                            <input type="text" class="form-control form-control-solid" name="slug" value="{{ $page->slug }}">
-                                            <div class="fv-plugins-message-container invalid-feedback">
-                                                @error('slug')
-                                                    {{ $message }}
-                                                @enderror
+                                @if(!empty($page->type) && !in_array($page->type, $options['options_disabled']['meta']))
+                                    @if(!empty($page->type) && !in_array($page->type, $options['options_disabled']['slug']))
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="fv-row mb-7 fv-plugins-icon-container">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                                        <span class="required">Slug</span> :
+                                                    </label>
+                                                    <input type="text" class="form-control form-control-solid" name="slug" value="{{ old('slug', empty($page) ? '' : $page->slug) }}">
+                                                    <div class="fv-plugins-message-container invalid-feedback">
+                                                        @error('slug')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
+                                    @endif
 
                                 <div class="row">
                                     <div class="col">
@@ -124,7 +138,7 @@
                                             <label class="fs-6 fw-semibold form-label mt-3">
                                                 <span>Méta Titre</span> :
                                             </label>
-                                            <input type="text" class="form-control form-control-solid" name="meta_title" value="{{ $page->meta_title }}">
+                                            <input type="text" class="form-control form-control-solid" name="meta_title" value="{{ old('meta_title', empty($page) ? '' : $page->meta_title) }}">
                                             <div class="form-text">Recommandé entre 60 et 160 caractères</div>
                                             <div class="fv-plugins-message-container invalid-feedback">
                                                 @error('meta_title')
@@ -141,16 +155,17 @@
                                             <label class="fs-6 fw-semibold form-label mt-3">
                                                 <span>Méta Description</span> :
                                             </label>
-                                            <textarea class="form-control form-control-solid" data-kt-autosize="true" name="meta_desc" rows="3">{{ $page->meta_desc }}</textarea>
+                                            <textarea class="form-control form-control-solid" data-kt-autosize="true" name="meta_desc" rows="3">{{ old('meta_desc', empty($page) ? '' : $page->meta_desc) }}</textarea>
                                             <div class="form-text">Recommandé entre 60 et 160 caractères</div>
                                             <div class="fv-plugins-message-container invalid-feedback">
                                                 @error('meta_title')
-                                                {{ $message }}
+                                                    {{ $message }}
                                                 @enderror
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                @endif
 
                             </div>
                         </div>
