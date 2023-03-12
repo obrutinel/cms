@@ -30,6 +30,9 @@ return [
 
             ],
         ],
+        'is_publish' => [
+            'home'
+        ],
         'content' => [
             'slide'
         ],

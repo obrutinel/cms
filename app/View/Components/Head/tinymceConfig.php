@@ -9,6 +9,6 @@ class tinymceConfig extends Component
 {
     public function render(): View
     {
-        return view('components.head.tinymce-config');
+        return view('components.cms.tinymce-config');
     }
 }

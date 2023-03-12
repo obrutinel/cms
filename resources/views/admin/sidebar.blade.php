@@ -36,6 +36,8 @@
                         {{--<x-nav-item name="Paramètres" :route="route('pages.edit', 1)" :active="$page->type">
                         <x-nav-subitem name="Paramètres" :route="route('pages.edit', 1)" :active="$page->type">--}}
 
+
+
                         <span class="menu-link py-2">
                               <span class="menu-icon">
                                 <i class="fa-solid fa-home"></i>
@@ -63,14 +65,7 @@
                         </div>
                     </div>
 
-                    <div class="menu-item">
-                        <a href="{{ route('pages.edit', 3) }}" class="menu-link {{ request()->get('id') == 3 ? 'active' : '' }}">
-                            <span class="menu-icon">
-                                <i class="fa-solid fa-file-alt"></i>
-                            </span>
-                            <span class="menu-title">Contact</span>
-                        </a>
-                    </div>
+                    <x-cms.navigation.item label="Contact !!!" id="3" />
 
                     <div class="menu-item">
                         <a href="{{ route('globals.edit') }}" class="menu-link {{ request()->routeIs('globals*') ? 'active' : '' }}">

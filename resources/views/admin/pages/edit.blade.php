@@ -25,7 +25,7 @@
 @section('content')
     <div class="col-xl-12">
 
-        <div class="card mb-5 mb-xl-8">
+        <div class="mb-5 mb-xl-8">
 
             @if(empty($page))
                 <form method="POST" action="{{ route('pages.store') }}">
@@ -102,16 +102,18 @@
                         <div class="card">
                             <div class="card-body pt-5">
 
-                                <div class="row">
-                                    <div class="col mt-3 mb-7">
-                                        <div class="form-check form-switch form-check-custom form-check-solid">
-                                            <input class="form-check-input" name="is_publish" type="checkbox" value="1" @checked(empty($page)??$page->is_publish) />
-                                            <label class="form-check-label" for="flexSwitchDefault">
-                                                Publier
-                                            </label>
+                                @if(!empty($page->type) && !in_array($page->type, $options['options_disabled']['is_publish']))
+                                    <div class="row">
+                                        <div class="col mt-3 mb-7">
+                                            <div class="form-check form-switch form-check-custom form-check-solid">
+                                                <input class="form-check-input" name="is_publish" type="checkbox" value="1" @checked(empty($page)??$page->is_publish) />
+                                                <label class="form-check-label" for="flexSwitchDefault">
+                                                    Publier
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
 
                                 @if(!empty($page->type) && !in_array($page->type, $options['options_disabled']['meta']))
                                     @if(!empty($page->type) && !in_array($page->type, $options['options_disabled']['slug']))
