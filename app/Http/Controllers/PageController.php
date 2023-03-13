@@ -6,6 +6,7 @@ use App\Models\Page;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use MongoDB\Driver\Session;
 
 class PageController extends Controller

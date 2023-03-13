@@ -3,9 +3,10 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\GlobalController;
+use App\Http\Controllers\GroupSettingController;
+use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +37,8 @@ Route::middleware('auth')->prefix('admin')
         //Route::get('/pages/{page}/list', [PageController::class, 'index'])->name('pages.list');
         Route::get('/pages/{type}/list', [PageController::class, 'index'])->name('pages.list');
         Route::get('/pages/create/{type?}', [PageController::class, 'create'])->name('pages.create');
+
+        Route::post('/upload', ImageUploadController::class)->name('upload');
 
         Route::get('/globals/edit', [GlobalController::class, 'edit'])->name('globals.edit');
         Route::post('/globals/update', [GlobalController::class, 'update'])->name('globals.update');

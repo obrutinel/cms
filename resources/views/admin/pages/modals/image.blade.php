@@ -9,7 +9,7 @@
                 </div>
             </div>
 
-            <form action="" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('upload') }}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="modal-body">
@@ -25,7 +25,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Valider</button>
+                    <button type="submit" class="btn btn-primary">Valider</button>
                 </div>
             </form>
         </div>

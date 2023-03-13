@@ -28,9 +28,9 @@
         <div class="mb-5 mb-xl-8">
 
             @if(empty($page))
-                <form method="POST" action="{{ route('pages.store') }}">
+                <form method="POST" action="{{ route('pages.store') }}" enctype="multipart/form-data">
             @else
-                <form method="POST" action="{{ route('pages.update', $page) }}">
+                <form method="POST" action="{{ route('pages.update', $page) }}" enctype="multipart/form-data">
                 @method('PUT')
                @endif
 
@@ -66,18 +66,21 @@
                                             <label class="fs-6 fw-semibold form-label mt-3 me-5">
                                                 <span>Image</span> :
                                             </label>
-                                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_1">
+
+                                            <button type="submit" name="upload_image" value="step_1" class="btn btn-sm btn-primary">
+                                                Valider
+                                            </button>
+                                           <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_1">
                                                 Ajouter
                                             </button>
                                             @error('image')
-                                            <div class="fv-plugins-message-container invalid-feedback">
-                                                {{ $message }}
-                                            </div>
+                                                <div class="fv-plugins-message-container invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
                                             @enderror
                                         </div>
                                     </div>
                                 </div>
-                                @include('admin.pages.modals.image')
 
                                 @if(!empty($page->type) && !in_array($page->type, $options['options_disabled']['content']))
                                     <div class="row">
@@ -194,5 +197,8 @@
                     </div>
                 </div>
             </form>
+
+                @include('admin.pages.modals.image')
+        </div>
     </div>
 @endsection
