@@ -1,5 +1,5 @@
-<div class="modal fade" tabindex="-1" id="kt_modal_1">
-    <div class="modal-dialog modal-lg">
+<div class="modal fade" tabindex="-1" id="imageModal">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title">Modal title</h3>
@@ -13,19 +13,21 @@
                 @csrf
 
                 <div class="modal-body">
-                    <div class="fv-row mb-7 fv-plugins-icon-container">
-                       <input type="file" name="image" class="form-control form-control-solid">
-                        @error('image')
-                            <div class="fv-plugins-message-container invalid-feedback">
-                                {{ $message }}
+                    <div class="img-container">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <img id="image" src="https://avatars0.githubusercontent.com/u/3456749">
                             </div>
-                        @enderror
+                            <div class="col-md-2">
+                                <div class="preview"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Valider</button>
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" id="crop">Valider</button>
                 </div>
             </form>
         </div>

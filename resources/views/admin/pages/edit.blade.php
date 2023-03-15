@@ -66,13 +66,13 @@
                                             <label class="fs-6 fw-semibold form-label mt-3 me-5">
                                                 <span>Image</span> :
                                             </label>
-
-                                            <button type="submit" name="upload_image" value="step_1" class="btn btn-sm btn-primary">
+                                            <input type="file" name="image" class="form-control form-control-solid image">
+                                            <!--<button type="submit" name="upload_image" value="step_1" class="btn btn-sm btn-primary">
                                                 Valider
                                             </button>
-                                           <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_1">
+                                           <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#imageModal">
                                                 Ajouter
-                                            </button>
+                                            </button>-->
                                             @error('image')
                                                 <div class="fv-plugins-message-container invalid-feedback">
                                                     {{ $message }}
@@ -198,7 +198,94 @@
                 </div>
             </form>
 
-                @include('admin.pages.modals.image')
+           @include('admin.pages.modals.image')
         </div>
     </div>
 @endsection
+@push('custom-js')
+    <script>
+        $(document).ready(function() {
+
+            let $modal = $('#imageModal');
+            let image = document.getElementById('image');
+            let cropper;
+
+            $("body").on("change", ".image", function (e) {
+
+                let reader;
+                let file;
+                let url;
+                let files = e.target.files;
+
+                let done = function (url) {
+                    image.src = url;
+                    $modal.modal('show');
+                };
+
+                if (files && files.length > 0) {
+                    file = files[0];
+                    if (URL) {
+                        done(URL.createObjectURL(file));
+                    } else if (FileReader) {
+                        reader = new FileReader();
+                        reader.onload = function (e) {
+                            console.log(reader);
+                            done(reader.result);
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                }
+
+            });
+
+            $modal.on('shown.bs.modal', function () {
+                cropper = new Cropper(image, {
+                    aspectRatio: 1,
+                    viewMode: 3,
+                    preview: '.preview'
+                });
+            }).on('hidden.bs.modal', function () {
+                cropper.destroy();
+                cropper = null;
+            });
+
+
+            $("#crop").click(function(){
+
+                canvas = cropper.getCroppedCanvas({
+                    width: 160,
+                    height: 160,
+                });
+                canvas.toBlob(function(blob) {
+
+                    let url = URL.createObjectURL(blob);
+                    let reader = new FileReader();
+
+                    reader.readAsDataURL(blob);
+                    reader.onloadend = function() {
+
+                        let base64data = reader.result;
+
+                        $.ajax({
+                            type: "POST",
+                            dataType: "json",
+                            url: "/admin/upload",
+                            data: {
+                                'id': {{ $page->id }},
+                                '_token': $('input[name="_token"]').val(),
+                                'image': base64data,
+                            },
+                            success: function(data){
+                                console.log(data);
+                                $modal.modal('hide');
+                                alert("Crop image successfully uploaded");
+                            }
+                        });
+                    }
+                });
+
+            });
+
+        });
+    </script>
+@endpush

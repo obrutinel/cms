@@ -22,6 +22,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             $table->string('title');
+            $table->string('image')->nullable();
             $table->text('content')->nullable();
             $table->string('slug', 255)->nullable()->unique();
 

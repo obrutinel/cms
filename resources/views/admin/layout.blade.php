@@ -11,10 +11,12 @@
 
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Inter:300,400,500,600,700"/>
 
-    <link href="{{ asset('metronic/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('metronic/css/style.bundle.css') }}" rel="stylesheet" type="text/css"/>
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('metronic/plugins/global/plugins.bundle.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('metronic/plugins/custom/cropper/cropper.bundle.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('metronic/css/style.bundle.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('metronic/css/custom.css') }}" />
     @stack('custom-css')
+
 </head>
 <body id="kt_app_body"
       data-kt-app-layout="dark-sidebar"
@@ -68,7 +70,7 @@
 
 <script src="{{ asset('metronic/plugins/global/plugins.bundle.js') }}"></script>
 <script src="{{ asset('metronic/js/scripts.bundle.js') }}"></script>
-
+<script src="{{ asset('metronic/plugins/custom/cropper/cropper.bundle.js') }}"></script>
 <x-head.tinymce-config/>
 
 
