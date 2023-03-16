@@ -30,6 +30,10 @@ class ImageUploadController extends Controller
             $img->encode('webp');
             $img->save($folderPath.$filename.'.webp');
 
+            $img->resize(null, 120, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($folderPath.'min_'.$filename.'.webp');
+
             Page::find($request->id)->update([
                 'image' => $filename.'.webp'
             ]);

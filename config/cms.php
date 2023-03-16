@@ -25,10 +25,8 @@ return [
 
     'options_disabled' => [
 
-        'edit_btn' => [
-            'type' => [
-
-            ],
+        'image' => [
+            ''
         ],
         'is_publish' => [
             'home'

@@ -12,6 +12,8 @@
             <form method="POST" action="{{ route('upload') }}" enctype="multipart/form-data">
                 @csrf
 
+                <input type="hidden" name="page_id" value="{{ $page->id }}">
+
                 <div class="modal-body">
                     <div class="img-container">
                         <div class="row">
