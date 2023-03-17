@@ -32,7 +32,8 @@ return [
             'home'
         ],
         'content' => [
-            'slide'
+            'slide',
+            'contact'
         ],
         'slug' => [
             'home'

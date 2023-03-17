@@ -3,10 +3,11 @@
 namespace App\View\Components\Cms;
 
 use App\Models\Page;
+use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Image extends Component
+class Content extends Component
 {
     public function __construct(
         public Page $page
@@ -14,7 +15,7 @@ class Image extends Component
 
     public function shouldRender(): bool
     {
-        if(in_array($this->page->type, config('cms.options_disabled.image'))) {
+        if(in_array($this->page->type, config('cms.options_disabled.content'))) {
             return false;
         }
 
@@ -23,6 +24,6 @@ class Image extends Component
 
     public function render(): View
     {
-        return view('components.cms.image');
+        return view('components.cms.content');
     }
 }
