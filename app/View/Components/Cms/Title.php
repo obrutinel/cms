@@ -3,15 +3,21 @@
 namespace App\View\Components\Cms;
 
 use App\Models\Page;
-use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class Title extends Component
 {
+    public array $options = [];
+
     public function __construct(
         public Page $page
-    ) {}
+    ) {
+        if(array_key_exists($this->page->type, config('cms.options.has_title'))) {
+            $this->options = config('cms.options.has_title.' . $this->page->type);
+        }
+
+    }
 
     public function shouldRender(): bool
     {

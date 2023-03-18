@@ -21,6 +21,13 @@ return [
             ],
         ],
 
+        'has_title' => [
+            'contact' => [
+                'label' => 'contact',
+                'help' => 'Lorem ipsum',
+            ],
+        ],
+
     ],
 
     'options_disabled' => [
@@ -36,7 +43,7 @@ return [
         ],
         'content' => [
             'slide',
-            'contact_'
+            'contact'
         ],
         'slug' => [
             'home'
