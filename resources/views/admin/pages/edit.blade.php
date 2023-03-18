@@ -89,24 +89,9 @@
                                     </div>
                                 @endif
 
+                                <x-cms.slug :$page />
+
                                 @if(!empty($page->type) && !in_array($page->type, $options['options_disabled']['meta']))
-                                    @if(!empty($page->type) && !in_array($page->type, $options['options_disabled']['slug']))
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="fv-row mb-7 fv-plugins-icon-container">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                                        <span class="required">Slug</span> :
-                                                    </label>
-                                                    <input type="text" class="form-control form-control-solid" name="slug" value="{{ old('slug', empty($page) ? '' : $page->slug) }}">
-                                                    <div class="fv-plugins-message-container invalid-feedback">
-                                                        @error('slug')
-                                                            {{ $message }}
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endif
 
                                 <div class="row">
                                     <div class="col">

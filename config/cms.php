@@ -25,6 +25,9 @@ return [
 
     'options_disabled' => [
 
+        'title' => [
+            ''
+        ],
         'image' => [
             ''
         ],
@@ -33,7 +36,7 @@ return [
         ],
         'content' => [
             'slide',
-            'contact'
+            'contact_'
         ],
         'slug' => [
             'home'
