@@ -76,7 +76,7 @@
                         <div class="card">
                             <div class="card-body pt-5">
 
-                                @if(!empty($page->type) && !in_array($page->type, $options['options_disabled']['is_publish']))
+                                @if(!empty($page->type) && !in_array($page->type, $options['options_disabled']['types']['is_publish']))
                                     <div class="row">
                                         <div class="col mt-3 mb-7">
                                             <div class="form-check form-switch form-check-custom form-check-solid">
@@ -91,7 +91,7 @@
 
                                 <x-cms.slug :$page />
 
-                                @if(!empty($page->type) && !in_array($page->type, $options['options_disabled']['meta']))
+                                @if(!empty($page->type) && !in_array($page->type, $options['options_disabled']['types']['meta']))
 
                                 <div class="row">
                                     <div class="col">

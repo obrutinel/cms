@@ -22,34 +22,48 @@ return [
         ],
 
         'has_title' => [
-            'contact' => [
-                'label' => 'contact',
-                'help' => 'Lorem ipsum',
+            'types' => [
+                'contact' => [
+                    'label' => 'aaaaaaaa',
+                    'help' => 'aaaa',
+                ],
+            ],
+        ],
+
+        'has_content' => [
+            'types' => [
+            ],
+        ],
+
+        'has_slug' => [
+            'types' => [
+                'label' => 'aaaaaaaa',
+                'help' => 'aaaa',
             ],
         ],
 
     ],
 
     'options_disabled' => [
-
-        'title' => [
-            ''
-        ],
-        'image' => [
-            ''
-        ],
-        'is_publish' => [
-            'home'
-        ],
-        'content' => [
-            'slide',
-            'contact'
-        ],
-        'slug' => [
-            'home'
-        ],
-        'meta' => [
-            'slide'
+        'types' => [
+            'title' => [
+                ''
+            ],
+            'image' => [
+                ''
+            ],
+            'is_publish' => [
+                'home'
+            ],
+            'content' => [
+                'slide',
+            ],
+            'slug' => [
+                'home'
+            ],
+            'meta' => [
+                'slide'
+            ],
         ],
     ],
 

@@ -12,16 +12,16 @@ class Title extends Component
 
     public function __construct(
         public Page $page
-    ) {
-        if(array_key_exists($this->page->type, config('cms.options.has_title'))) {
-            $this->options = config('cms.options.has_title.' . $this->page->type);
+    )
+    {
+        if(array_key_exists($this->page->type, config('cms.options.has_title.types'))) {
+            $this->options = config('cms.options.has_title.types.' . $this->page->type);
         }
-
     }
 
     public function shouldRender(): bool
     {
-        if(in_array($this->page->type, config('cms.options_disabled.title'))) {
+        if(in_array($this->page->type, config('cms.options_disabled.types.title'))) {
             return false;
         }
 

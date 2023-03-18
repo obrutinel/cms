@@ -14,7 +14,7 @@ class Image extends Component
 
     public function shouldRender(): bool
     {
-        if(in_array($this->page->type, config('cms.options_disabled.image'))) {
+        if(in_array($this->page->type, config('cms.options_disabled.types.image'))) {
             return false;
         }
 

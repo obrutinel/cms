@@ -15,7 +15,7 @@ class Slug extends Component
 
     public function shouldRender(): bool
     {
-        if (in_array($this->page->type, config('cms.options_disabled.slug'))) {
+        if (in_array($this->page->type, config('cms.options_disabled.types.slug'))) {
             return false;
         }
 
