@@ -70,7 +70,7 @@
 
 <script src="{{ asset('metronic/plugins/global/plugins.bundle.js') }}"></script>
 <script src="{{ asset('metronic/js/scripts.bundle.js') }}"></script>
-<script src="{{ asset('metronic/plugins/custom/cropper/cropper.bundle.js') }}"></script>
+
 <x-head.tinymce-config/>
 
 

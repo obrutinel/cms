@@ -24,8 +24,20 @@ return [
         'has_title' => [
             'types' => [
                 'contact' => [
-                    'label' => 'aaaaaaaa',
-                    'help' => 'aaaa',
+                    //'label' => 'aaaaaaaa',
+                    //'help' => 'aaaa',
+                ],
+            ],
+        ],
+
+        'has_image' => [
+            'types' => [
+                'contact' => [
+                    'label' => 'Photo',
+                    'help' => 'Taille minimum: 1920x1080',
+                    'crop' => true,
+                    'width' => 800,
+                    'height' => 600,
                 ],
             ],
         ],

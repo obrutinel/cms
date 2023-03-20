@@ -6,8 +6,6 @@ use App\Models\Page;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use MongoDB\Driver\Session;
 
 class PageController extends Controller
 {
@@ -89,6 +87,15 @@ class PageController extends Controller
 
     public function destroy(int $id): RedirectResponse
     {
+        $page = Page::findOrFail($id);
+
+        if(!empty($page->image)) {
+            $path = public_path('upload/');
+            if(file_exists($path.$page->image)) {
+                unlink($path.$page->image);
+            }
+        }
+
         Page::destroy($id);
 
         return redirect()->route('pages.index')

@@ -3,16 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Page;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Melihovv\Base64ImageDecoder\Base64ImageDecoder;
 
 class ImageUploadController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): JsonResponse
     {
         /*$request->validate([
             'image' => 'sometimes|image|mimes:jpg,png,jpeg|max:2048',
@@ -30,7 +28,7 @@ class ImageUploadController extends Controller
             $img->encode('webp');
             $img->save($folderPath.$filename.'.webp');
 
-            $img->resize(null, 120, function ($constraint) {
+            $img->resize(null, 150, function ($constraint) {
                 $constraint->aspectRatio();
             })->save($folderPath.'min_'.$filename.'.webp');
 

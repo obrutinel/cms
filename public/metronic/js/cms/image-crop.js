@@ -1,19 +1,15 @@
 
-var imageInputElement = document.querySelector("#kt_image_input");
-var imageInput = KTImageInput.getInstance(imageInputElement);
-imageInput.on("kt.imageinput.removed", function() {
-    alert("kt.imageinput.removed event is fired");
-});
-/*
-let imageInputElement = document.querySelector("#kt_image_input");
-let imageInput = KTImageInput.getInstance(imageInputElement);
-imageInput.on("kt.imageinput.remove", function() {
-    alert('Remove');
-});*/
 
 $(document).ready(function() {
 
+    /*$('#kt_image_input').on('click', function() {
+        alert('ok');
+    });*/
+
     let $modal = $('#imageModal');
+    let width = $modal.find('input[name="width"]').val();
+    let height = $modal.find('input[name="height"]').val();
+    let ratio = height/ width;
     let image = document.getElementById('image');
     let cropper;
 
@@ -36,7 +32,6 @@ $(document).ready(function() {
             } else if (FileReader) {
                 reader = new FileReader();
                 reader.onload = function (e) {
-                    console.log(reader);
                     done(reader.result);
                 };
                 reader.readAsDataURL(file);
@@ -46,9 +41,12 @@ $(document).ready(function() {
     });
 
     $modal.on('shown.bs.modal', function () {
+
         cropper = new Cropper(image, {
-            aspectRatio: 1,
+            aspectRatio: ratio,
             viewMode: 3,
+            //minContainerWidth: width,
+            //minContainerHeight: height,
             preview: '.preview'
         });
     }).on('hidden.bs.modal', function () {
@@ -60,8 +58,8 @@ $(document).ready(function() {
     $("#crop").click(function(){
 
         canvas = cropper.getCroppedCanvas({
-            width: 160,
-            height: 160,
+            width: width,
+            height: height,
         });
         canvas.toBlob(function(blob) {
 
@@ -81,6 +79,8 @@ $(document).ready(function() {
                         'id': $modal.find('input[name="page_id"]').val(),
                         '_token': $('input[name="_token"]').val(),
                         'image': base64data,
+                        'width': width,
+                        'height': height,
                     },
                     success: function(data) {
                         $modal.modal('hide');
