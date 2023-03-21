@@ -22,6 +22,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             $table->string('title');
+            $table->text('excerpt')->nullable();
             $table->string('image')->nullable();
             $table->text('content')->nullable();
             $table->string('slug', 255)->nullable()->unique();
@@ -31,6 +32,7 @@ return new class extends Migration
 
             $table->string('type', 255)->default('page');
             $table->boolean('is_publish')->default(0);
+            $table->dateTime('publish_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\InputType;
+//use App\Enums\InputType;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -20,9 +20,10 @@ class Setting extends Model
         'type'
     ];
 
-    protected $casts = [
+    // TODO: Make Enum InputType
+    /*protected $casts = [
         'type' => InputType::class
-    ];
+    ];*/
 
     protected function groupId(): Attribute
     {
@@ -34,7 +35,10 @@ class Setting extends Model
     protected function slug(): Attribute
     {
         return Attribute::make(
-            set: fn (string $value) => Str::of($value)->slug('_'),
+            set: function () {
+                dd($this->attributes['name']);
+                return Str::of($this->attributes['name'])->slug('_');
+            },
         );
     }
 

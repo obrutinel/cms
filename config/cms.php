@@ -42,15 +42,37 @@ return [
             ],
         ],
 
+        'has_excerpt' => [
+            'types' => [
+            ],
+        ],
+
         'has_content' => [
             'types' => [
             ],
         ],
 
+        'has_publish' => [
+            'types' => [
+                'contact' => [
+                    'label' => 'Activer',
+                ],
+            ],
+        ],
+
+
         'has_slug' => [
             'types' => [
                 'label' => 'aaaaaaaa',
                 'help' => 'aaaa',
+            ],
+        ],
+
+        'has_date' => [
+            'types' => [
+                'contact' => [
+                    'label' => 'Date',
+                ],
             ],
         ],
 
@@ -64,14 +86,19 @@ return [
             'image' => [
                 ''
             ],
-            'is_publish' => [
+            'publish' => [
                 'home'
+            ],
+            'excerpt' => [
+                'contact',
             ],
             'content' => [
                 'slide',
             ],
             'slug' => [
-                'home'
+                'home', 'slide'
+            ],
+            'date' => [
             ],
             'meta' => [
                 'slide'

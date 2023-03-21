@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('group_settings', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->smallInteger('position');
+            $table->smallInteger('position')->default(0);
         });
     }
 

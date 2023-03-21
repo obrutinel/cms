@@ -61,10 +61,12 @@ class PageController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required|max:255',
+            'excerpt' => 'sometimes',
             'content' => 'sometimes',
             'meta_title' => 'sometimes',
             'meta_desc' => 'sometimes',
             'is_publish' => 'sometimes|boolean',
+            'published_at' => 'sometimes|nullable|date_format:d/m/Y',
             'slug' => 'sometimes|max:255|unique:pages,slug,'.$id,
         ]);
 
