@@ -2,8 +2,9 @@
 
 namespace App\View\Components\Cms\Navigation;
 
-use Closure;
+use App\Models\Page;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 use Illuminate\View\Component;
 
 class Item extends Component
@@ -11,6 +12,7 @@ class Item extends Component
     public string $route = '';
 
     public function __construct(
+        public Request $request,
         public string $label,
         public int $id = 0,
         public string $type = '',
@@ -19,15 +21,35 @@ class Item extends Component
     ) {
 
         if(!empty($id)) {
+
             $this->route = route('pages.edit', $id);
+
+            if ($this->request->route('page') == $id) {
+                $this->active = 'active';
+            }
         }
 
         if(!empty($type)) {
+
             $this->route = route('pages.list', $type);
+
+            if ($this->request->route('page')) {
+
+                $currentId = $this->request->route('page');
+                $page = Page::findOrFail($currentId);
+
+                if ($page->type == $type) {
+                    $this->active = 'active';
+                }
+            }
+
+            if ($request->route('type') == $type) {
+                $this->active = 'active';
+            }
+
         }
 
     }
-
 
     public function render(): View
     {

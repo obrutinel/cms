@@ -13,3 +13,4 @@
         </div>
     </div>
 </div>
+<x-head.tinymce-config/>

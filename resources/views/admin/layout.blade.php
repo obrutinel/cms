@@ -43,12 +43,11 @@
                 <div class="d-flex flex-column flex-column-fluid">
 
                     <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
-                        <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack">
+                        <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack my-2">
                             @yield('breadcrumb')
                             @yield('buttons')
                         </div>
                     </div>
-
 
                     <div id="kt_app_content" class="app-content flex-column-fluid">
                         <div id="kt_app_content_container" class="app-container container-fluid">
@@ -63,17 +62,12 @@
         </div>
 
     </div>
-
 </div>
 
 <!--<script>var hostUrl = "assets/";</script>-->
 
 <script src="{{ asset('metronic/plugins/global/plugins.bundle.js') }}"></script>
 <script src="{{ asset('metronic/js/scripts.bundle.js') }}"></script>
-
-<x-head.tinymce-config/>
-
-
 
 @stack('custom-js')
 

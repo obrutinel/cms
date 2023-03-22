@@ -65,7 +65,10 @@
                         </div>
                     </div>
 
-                    <x-cms.navigation.item label="Contact !!!" id="3" />
+                    <x-cms.navigation.item label="A propos" id="2" />
+                    <x-cms.navigation.item label="Contact" id="3" />
+                    <x-cms.navigation.item label="Mentions légales" id="4" />
+                    <x-cms.navigation.item label="Slider" type="slide" icon="fa-solid fa-tools" />
 
                     <div class="menu-item">
                         <a href="{{ route('globals.edit') }}" class="menu-link {{ request()->routeIs('globals*') ? 'active' : '' }}">

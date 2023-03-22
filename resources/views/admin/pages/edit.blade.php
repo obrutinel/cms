@@ -8,12 +8,6 @@
     </div>
 @endsection
 
-@section('buttons')
-    <div class="d-flex align-items-center gap-2 gap-lg-3">
-        @include('admin.partials.buttons')
-    </div>
-@endsection
-
 @section('content')
 
     <div class="col-xl-12">
@@ -48,7 +42,7 @@
                         <div class="card">
                             <div class="card-body py-5">
                                 <div class="d-flex justify-content-end">
-                                    @include('admin.partials.buttons')
+                                    <x-cms.buttons :$page />
                                 </div>
                             </div>
                         </div>
