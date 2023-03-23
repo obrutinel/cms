@@ -3,6 +3,7 @@
 namespace App\View\Components\Cms;
 
 use App\Models\Page;
+use App\Services\ConfigService;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
@@ -14,18 +15,18 @@ class Image extends Component
         public Page $page
     )
     {
-        if(array_key_exists($this->page->type, config('cms.options.has_image.types'))) {
-            $this->options = config('cms.options.has_image.types.' . $this->page->type);
+        if (ConfigService::has($this->page->type, 'has_image')) {
+            $this->options = ConfigService::get($this->page->type, 'has_image');
         }
     }
 
     public function shouldRender(): bool
     {
-        if(in_array($this->page->type, config('cms.options_disabled.types.image'))) {
+        if (ConfigService::isDisable($this->page->type, 'image')) {
             return false;
         }
 
-        if(!array_key_exists($this->page->type, config('cms.options.has_image.types'))) {
+        if (ConfigService::hasNot($this->page->type, 'has_image')) {
             return false;
         }
 

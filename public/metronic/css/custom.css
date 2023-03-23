@@ -1,3 +1,5 @@
+/*      @Image Modal
+------------------------------------ */
 #imageModal img {
     display: block;
     max-width: 100%;
@@ -8,5 +10,4 @@
     width: 160px;
     height: 160px;
     margin: 0 auto;
-;
 }

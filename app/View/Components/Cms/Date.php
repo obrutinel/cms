@@ -3,6 +3,7 @@
 namespace App\View\Components\Cms;
 
 use App\Models\Page;
+use App\Services\ConfigService;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -15,18 +16,22 @@ class Date extends Component
         public Page $page
     )
     {
-        if(array_key_exists($this->page->type, config('cms.options.has_date.types'))) {
-            $this->options = config('cms.options.has_date.types.' . $this->page->type);
+        if (ConfigService::has($this->page->type, 'has_date')) {
+            $this->options = ConfigService::get($this->page->type, 'has_date');
         }
     }
 
     public function shouldRender(): bool
     {
-        if(array_key_exists($this->page->type, config('cms.options.has_date.types'))) {
-            return true;
+        if (ConfigService::isDisable($this->page->type, 'date')) {
+            return false;
         }
 
-        return false;
+        if (ConfigService::hasNot($this->page->type, 'has_date')) {
+            return false;
+        }
+
+        return true;
     }
 
 

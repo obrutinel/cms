@@ -3,6 +3,7 @@
 namespace App\View\Components\Cms;
 
 use App\Models\Page;
+use App\Services\ConfigService;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
@@ -17,7 +18,7 @@ class Meta extends Component
 
     public function shouldRender(): bool
     {
-        if(in_array($this->page->type, config('cms.options_disabled.types.meta'))) {
+        if (ConfigService::isDisable($this->page->type, 'meta')) {
             return false;
         }
 

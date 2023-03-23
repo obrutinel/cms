@@ -30,6 +30,7 @@ return [
             ],
         ],
 
+        // Champs image caché par défault
         'has_image' => [
             'types' => [
                 'contact' => [
@@ -68,6 +69,7 @@ return [
             ],
         ],
 
+        // Champs date caché par défault
         'has_date' => [
             'types' => [
                 'contact' => [

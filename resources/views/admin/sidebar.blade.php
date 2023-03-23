@@ -27,111 +27,85 @@
              data-kt-scroll-offset="5px"
              data-kt-scroll-save-state="true">
 
-            <div class="menu menu-column menu-rounded menu-sub-indention px-3" id="#kt_app_sidebar_menu" data-kt-menu="true" data-kt-menu-expand="false">
-                <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
+            <div class="menu menu-column menu-rounded menu-sub-indention px-3" id="#kt_app_sidebar_menu"
+                 data-kt-menu="true" data-kt-menu-expand="false">
 
-                    <div data-kt-menu-trigger="click" class="menu-item here menu-accordion {{ !empty($page) && $page->type == 'home' ? 'show' : '' }}">
+                <x-cms.navigation.subitem label="Accueil" id="2" icon="fa-home">
+                    <x-cms.navigation.item label="Page" id="1"/>
+                    <x-cms.navigation.item label="Slider" type="slide" icon="fa-solid fa-list"/>
+                </x-cms.navigation.subitem>
 
+                <x-cms.navigation.item label="A propos" id="2"/>
+                <x-cms.navigation.item label="Contact" id="3"/>
+                <x-cms.navigation.item label="Mentions légales" id="4"/>
+                <x-cms.navigation.item label="Slider" type="slide" icon="fa-tools"/>
 
-                        {{--<x-nav-item name="Paramètres" :route="route('pages.edit', 1)" :active="$page->type">
-                        <x-nav-subitem name="Paramètres" :route="route('pages.edit', 1)" :active="$page->type">--}}
-
-
-
-                        <span class="menu-link py-2">
-                              <span class="menu-icon">
-                                <i class="fa-solid fa-home"></i>
-                            </span>
-                            <span class="menu-title">Accueil</span>
-                            <span class="menu-arrow"></span>
+                <div class="menu-item">
+                    <a href="{{ route('globals.edit') }}"
+                       class="menu-link {{ request()->routeIs('globals*') ? 'active' : '' }}">
+                        <span class="menu-icon">
+                            <i class="fa-solid fa-tools"></i>
                         </span>
-
-                        <div class="menu-sub menu-sub-accordion">
-
-                            <div class="menu-item">
-                                <a href="{{ route('pages.edit', 1) }}" class="menu-link {{ !empty($page) && $page->type == 'home' ? 'active' : '' }} py-2">
-                                    <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
-                                    <span class="menu-title">Page</span>
-                                </a>
-                            </div>
-
-                            <div class="menu-item">
-                                <a  href="{{ route('pages.list', 'slide') }}" class="menu-link {{ !empty($page) && $page->slide == 'slide' ? 'active' : '' }} py-2">
-                                    <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
-                                    <span class="menu-title">Slider</span>
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <x-cms.navigation.item label="A propos" id="2" />
-                    <x-cms.navigation.item label="Contact" id="3" />
-                    <x-cms.navigation.item label="Mentions légales" id="4" />
-                    <x-cms.navigation.item label="Slider" type="slide" icon="fa-solid fa-tools" />
-
-                    <div class="menu-item">
-                        <a href="{{ route('globals.edit') }}" class="menu-link {{ request()->routeIs('globals*') ? 'active' : '' }}">
-                            <span class="menu-icon">
-                                <i class="fa-solid fa-tools"></i>
-                            </span>
-                            <span class="menu-title">Paramètres</span>
-                        </a>
-                    </div>
-
-                    <div class="menu-item pt-5">
-                        <div class="menu-content">
-                            <span class="menu-heading fw-bold text-uppercase fs-7">ADMIN</span>
-                        </div>
-                    </div>
-
-                    <div data-kt-menu-trigger="click" class="menu-item here menu-accordion">
-
-                        <span class="menu-link py-2">
-                              <span class="menu-icon">
-                                <i class="fa-solid fa-file-alt"></i>
-                            </span>
-                            <span class="menu-title">Paramètres</span>
-                            <span class="menu-arrow"></span>
-                        </span>
-
-                        <div class="menu-sub menu-sub-accordion">
-
-                            <div class="menu-item">
-                                <a class="menu-link {{ request()->routeIs('group*') ? 'active' : '' }} py-2" href="{{ route('group_settings.index') }}">
-                                    <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
-                                    <span class="menu-title">Groupes</span>
-                                </a>
-                            </div>
-
-                            <div class="menu-item">
-                                <a class="menu-link {{ request()->routeIs('settings*') ? 'active' : '' }} py-2" href="{{ route('settings.index') }}">
-                                    <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
-                                    <span class="menu-title">Champs</span>
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <a href="{{ route('manager.index') }}" class="menu-link {{ request()->routeIs('manager*') ? 'active' : '' }}">
-                            <span class="menu-icon">
-                                <i class="fa-solid fa-stroopwafel"></i>
-                            </span>
-                            <span class="menu-title">Manager</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a href="{{ route('users.index') }}" class="menu-link {{ request()->routeIs('users*') ? 'active' : '' }}">
-                            <span class="menu-icon">
-                                <i class="fa-solid fa-users"></i>
-                            </span>
-                            <span class="menu-title">Utilisateurs</span>
-                        </a>
-                    </div>
-
+                        <span class="menu-title">Paramètres</span>
+                    </a>
                 </div>
+
+                <div class="menu-item pt-5">
+                    <div class="menu-content">
+                        <span class="menu-heading fw-bold text-uppercase fs-7">ADMIN</span>
+                    </div>
+                </div>
+
+                <div data-kt-menu-trigger="click" class="menu-item here menu-accordion">
+
+                    <span class="menu-link py-2">
+                          <span class="menu-icon">
+                            <i class="fa-solid fa-file-alt"></i>
+                        </span>
+                        <span class="menu-title">Paramètres</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+
+                    <div class="menu-sub menu-sub-accordion">
+
+                        <div class="menu-item">
+                            <a class="menu-link {{ request()->routeIs('group*') ? 'active' : '' }} py-2"
+                               href="{{ route('group_settings.index') }}">
+                                <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                                <span class="menu-title">Groupes</span>
+                            </a>
+                        </div>
+
+                        <div class="menu-item">
+                            <a class="menu-link {{ request()->routeIs('settings*') ? 'active' : '' }} py-2"
+                               href="{{ route('settings.index') }}">
+                                <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                                <span class="menu-title">Champs</span>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <a href="{{ route('manager.index') }}"
+                       class="menu-link {{ request()->routeIs('manager*') ? 'active' : '' }}">
+                        <span class="menu-icon">
+                            <i class="fa-solid fa-stroopwafel"></i>
+                        </span>
+                        <span class="menu-title">Manager</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="{{ route('users.index') }}"
+                       class="menu-link {{ request()->routeIs('users*') ? 'active' : '' }}">
+                        <span class="menu-icon">
+                            <i class="fa-solid fa-users"></i>
+                        </span>
+                        <span class="menu-title">Utilisateurs</span>
+                    </a>
+                </div>
+
             </div>
 
         </div>

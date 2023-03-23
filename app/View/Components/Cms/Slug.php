@@ -3,6 +3,7 @@
 namespace App\View\Components\Cms;
 
 use App\Models\Page;
+use App\Services\ConfigService;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -15,7 +16,7 @@ class Slug extends Component
 
     public function shouldRender(): bool
     {
-        if (in_array($this->page->type, config('cms.options_disabled.types.slug'))) {
+        if (ConfigService::isDisable($this->page->type, 'slug')) {
             return false;
         }
 

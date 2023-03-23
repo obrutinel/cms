@@ -3,6 +3,7 @@
 namespace App\View\Components\Cms;
 
 use App\Models\Page;
+use App\Services\ConfigService;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
@@ -14,14 +15,14 @@ class Content extends Component
         public Page $page
     )
     {
-        if(array_key_exists($this->page->type, config('cms.options.has_content.types'))) {
-            $this->options = config('cms.options.has_content.types.' . $this->page->type);
+        if (ConfigService::has($this->page->type, 'has_content')) {
+            $this->options = ConfigService::get($this->page->type, 'has_content');
         }
     }
 
     public function shouldRender(): bool
     {
-        if(in_array($this->page->type, config('cms.options_disabled.types.content'))) {
+        if (ConfigService::isDisable($this->page->type, 'content')) {
             return false;
         }
 
