@@ -39,8 +39,8 @@ Route::middleware('auth')->prefix('admin')
 
         Route::resource('pages', PageController::class)->except('show');
         //Route::get('/pages/{page}/list', [PageController::class, 'index'])->name('pages.list');
-        Route::get('/pages/{type}/list', [PageController::class, 'index'])->name('pages.list');
-        Route::get('/pages/create/{type?}', [PageController::class, 'create'])->name('pages.create');
+        Route::get('/pages/list/{type}/{id?}', [PageController::class, 'index'])->name('pages.list');
+        Route::get('/pages/create/{type}/{id?}', [PageController::class, 'create'])->name('pages.create');
 
         Route::post('/upload', ImageUploadController::class)->name('upload');
 

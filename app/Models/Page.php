@@ -34,13 +34,6 @@ class Page extends Model
         'published_at' => 'datetime',
     ];
 
-    protected function parentId(): Attribute
-    {
-        return Attribute::make(
-            set: fn (string $value) => !empty($value) ? $value:null,
-        );
-    }
-
     protected function slug(): Attribute
     {
         return Attribute::make(

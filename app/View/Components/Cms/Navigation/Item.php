@@ -31,7 +31,7 @@ class Item extends Component
 
         if(!empty($type)) {
 
-            $this->route = route('pages.list', $type);
+            $this->route = route('pages.list', [$type, $id]);
 
             if ($this->request->route('page')) {
 

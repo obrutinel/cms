@@ -22,31 +22,19 @@ class PageController extends Controller
         ]);
     }
 
-    public function create(string $type = null): View
+    public function create(string $type, int $id = null): RedirectResponse
     {
-        return view('admin.pages.edit', [
-            'type' => $type
-        ]);
-    }
 
-    public function store(Request $request): RedirectResponse
-    {
-        $validatedData = $request->validate([
-            'title' => 'required',
-            'content' => 'sometimes',
-            'type' => 'sometimes',
-            'is_publish' => 'sometimes|boolean',
-            'slug' => 'sometimes|max:255|unique:pages',
+        $page = Page::create([
+            'title' => 'A remplir',
+            'type' => $type,
+            'parent_id' => $id ?? null,
         ]);
 
-        if(!$request->has('is_publish')) {
-            $validatedData['is_publish'] = false;
-        }
+        $page->slug = 'page-' . $page->id;
+        $page->save();
 
-        Page::create($validatedData);
-
-        return redirect()->route('pages.list', $request->get('type'))
-            ->with('success', 'La page a bien été ajoutée');
+        return redirect()->route('pages.edit', $page->id);
     }
 
     public function edit(int $id): View
@@ -100,7 +88,7 @@ class PageController extends Controller
 
         Page::destroy($id);
 
-        return redirect()->route('pages.index')
+        return redirect()->route('pages.list', [$page->type, $page->parent_id])
             ->with('success', 'La page a bien été supprimée');
     }
 }

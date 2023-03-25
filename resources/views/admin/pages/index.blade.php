@@ -11,11 +11,11 @@
 @section('buttons')
     <div class="d-flex align-items-center gap-2 gap-lg-3">
         @if($parent_id)
-            <a href="{{ route('pages.index') }}" class="btn btn-light fw-bold">
+            <a href="{{ route('pages.list') }}" class="btn btn-light fw-bold">
                 <i class="fa-solid fa-rotate-left"></i> Retour
             </a>
         @endif
-        <a href="{{ route('pages.create', $type) }}" class="btn fw-bold btn-primary">
+        <a href="{{ route('pages.create', [$type, $id]) }}" class="btn fw-bold btn-primary">
             Ajouter une page {{ $type }}
         </a>
     </div>

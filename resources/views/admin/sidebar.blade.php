@@ -30,9 +30,11 @@
             <div class="menu menu-column menu-rounded menu-sub-indention px-3" id="#kt_app_sidebar_menu"
                  data-kt-menu="true" data-kt-menu-expand="false">
 
-                <x-cms.navigation.subitem label="Accueil" id="2" icon="fa-home">
+                <x-cms.navigation.subitem label="Accueil" icon="fa-home">
                     <x-cms.navigation.item label="Page" id="1"/>
-                    <x-cms.navigation.item label="Slider" type="slide" icon="fa-solid fa-list"/>
+                    <x-cms.navigation.item label="Slider" type="slide" id="1" icon="fa-solid fa-list"/>
+                    <x-cms.navigation.item label="Slider 2" type="slide" id="3" icon="fa-solid fa-list"/>
+                    <x-cms.navigation.item label="Bureaux" type="office" id="1" icon="fa-solid fa-list"/>
                 </x-cms.navigation.subitem>
 
                 <x-cms.navigation.item label="A propos" id="2"/>
