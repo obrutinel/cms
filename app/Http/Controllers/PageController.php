@@ -9,7 +9,7 @@ use Illuminate\View\View;
 
 class PageController extends Controller
 {
-    public function index(string $type): View
+    public function index(string $type, int $id = null): View
     {
         $pages = Page::where('type', $type)
             ->paginate(10);
@@ -18,6 +18,7 @@ class PageController extends Controller
             'pages' => $pages,
             'parent_id' => $page->id ?? null,
             'type' => $type,
+            'id' => $id,
             'options' => config('cms.options.has_list.type')
         ]);
     }

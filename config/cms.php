@@ -30,7 +30,7 @@ return [
             ],
         ],
 
-        // Champs image caché par défault
+        // Champs image caché par défaut
         'has_image' => [
             'types' => [
                 'contact' => [
@@ -78,6 +78,16 @@ return [
             ],
         ],
 
+    ],
+
+    'options_list' => [
+        'types' => [
+            'office' => [
+                'title' => 'Liste des bureaux',
+                //'subtitle' => 'sous titre',
+                'btn_add' => 'Ajouter un bureau',
+            ]
+        ]
     ],
 
     'options_disabled' => [

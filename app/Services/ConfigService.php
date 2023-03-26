@@ -23,4 +23,23 @@ class ConfigService
     {
         return in_array($pageType, config('cms.options_disabled.types.' . $option));
     }
+
+    public static function getTitle(string $pageType): string
+    {
+        if (!empty(config('cms.options_list.types.' . $pageType . '.title'))) {
+            return config('cms.options_list.types.' . $pageType . '.title');
+        }
+
+        return 'Liste des pages';
+    }
+
+    public static function getSubtitle(string $pageType): string
+    {
+        if (!empty(config('cms.options_list.types.' . $pageType . '.subtitle'))) {
+            return config('cms.options_list.types.' . $pageType . '.subtitle');
+        }
+
+        return '';
+    }
+
 }
