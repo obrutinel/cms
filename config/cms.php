@@ -23,8 +23,8 @@ return [
 
         'has_title' => [
             'types' => [
-                'contact' => [
-                    //'label' => 'aaaaaaaa',
+                'office' => [
+                    'label' => 'Lieu',
                     //'help' => 'aaaa',
                 ],
             ],
@@ -45,11 +45,24 @@ return [
 
         'has_excerpt' => [
             'types' => [
+                'office' => [
+                    'label' => 'Adresse',
+                ],
             ],
         ],
 
         'has_content' => [
             'types' => [
+            ],
+        ],
+
+        // Champs date caché par défault
+        'has_link' => [
+            'types' => [
+                'office' => [
+                    'label_link' => 'Téléphone',
+                    'label_url' => 'Email',
+                ],
             ],
         ],
 
@@ -61,11 +74,8 @@ return [
             ],
         ],
 
-
         'has_slug' => [
             'types' => [
-                'label' => 'aaaaaaaa',
-                'help' => 'aaaa',
             ],
         ],
 
@@ -90,6 +100,10 @@ return [
         ]
     ],
 
+    'has_custom_list' => [
+        'types' => ['office']
+    ],
+
     'options_disabled' => [
         'types' => [
             'title' => [
@@ -108,22 +122,29 @@ return [
                 'slide',
             ],
             'slug' => [
-                'home', 'slide'
+                'home', 'slide', 'office'
+            ],
+            'link' => [
             ],
             'date' => [
             ],
             'meta' => [
-                'slide'
+                'slide', 'office'
             ],
         ],
     ],
 
+
     /*
     |--------------------------------------------------------------------------
-    | Frontend Views Path
+    | Views Path
     |--------------------------------------------------------------------------
+    |
+    | Paths where views are created. You can change the default path.
+    |
     */
 
-    'frontend_views_path' => 'frontend/pages/',
+    'back_views_path' => 'admin/pages/',
+    'front_views_path' => 'frontend/pages/',
 
 ];

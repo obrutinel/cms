@@ -8,7 +8,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Date extends Component
+class Link extends Component
 {
     public array $options = [];
 
@@ -16,18 +16,18 @@ class Date extends Component
         public Page $page
     )
     {
-        if (ConfigService::has($this->page->type, 'has_date')) {
-            $this->options = ConfigService::get($this->page->type, 'has_date');
+        if (ConfigService::has($this->page->type, 'has_link')) {
+            $this->options = ConfigService::get($this->page->type, 'has_link');
         }
     }
 
     public function shouldRender(): bool
     {
-        if (ConfigService::isDisable($this->page->type, 'date')) {
+        if (ConfigService::isDisable($this->page->type, 'link')) {
             return false;
         }
 
-        if (ConfigService::hasNot($this->page->type, 'has_date')) {
+        if (ConfigService::hasNot($this->page->type, 'has_link')) {
             return false;
         }
 
@@ -36,6 +36,6 @@ class Date extends Component
 
     public function render(): View|Closure|string
     {
-        return view('components.cms.date');
+        return view('components.cms.link');
     }
 }

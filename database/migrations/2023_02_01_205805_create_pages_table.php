@@ -25,6 +25,8 @@ return new class extends Migration
             $table->text('excerpt')->nullable();
             $table->string('image')->nullable();
             $table->text('content')->nullable();
+            $table->string('link_label', 100)->nullable();
+            $table->string('link_url', 255)->nullable();
             $table->string('slug', 255)->nullable()->unique();
 
             $table->string('meta_title')->nullable();

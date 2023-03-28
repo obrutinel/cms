@@ -50,7 +50,9 @@ class ManagerController extends Controller
 
     public function update(Request $request, int $id): RedirectResponse
     {
-        (new TemplateService($request->type))->create();
+        (new TemplateService($request->type))
+            ->setViewPath(config('cms.front_views_path'))
+            ->create();
 
         $validatedData = $request->validate([
             'title' => 'required|max:255',

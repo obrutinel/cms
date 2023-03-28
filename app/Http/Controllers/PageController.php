@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Page;
+use App\Services\TemplateService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -11,10 +12,16 @@ class PageController extends Controller
 {
     public function index(string $type, int $id = null): View
     {
+        (new TemplateService())
+            ->setViewPath(config('cms.back_views_path'))
+            ->setBladeName($type)
+            ->copy();
+
+
         $pages = Page::where('type', $type)
             ->paginate(10);
 
-        return view('admin.pages.index', [
+        return view('admin.pages.'.$type, [
             'pages' => $pages,
             'parent_id' => $page->id ?? null,
             'type' => $type,
@@ -52,6 +59,8 @@ class PageController extends Controller
             'title' => 'required|max:255',
             'excerpt' => 'sometimes',
             'content' => 'sometimes',
+            'link_label' => 'sometimes',
+            'link_url' => 'sometimes',
             'meta_title' => 'sometimes',
             'meta_desc' => 'sometimes',
             'is_publish' => 'sometimes|boolean',

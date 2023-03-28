@@ -20,6 +20,8 @@ class Page extends Model
         'image',
         'excerpt',
         'content',
+        'link_label',
+        'link_url',
         'type',
         'meta_title',
         'meta_desc',

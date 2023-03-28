@@ -8,18 +8,10 @@ use League\Flysystem\Local\LocalFilesystemAdapter;
 
 class TemplateService
 {
-    private string $bladeName;
-    private string $viewPath;
+    private string $bladeName = 'custom';
+    private string $viewPath = '';
     private LocalFilesystemAdapter $adapter;
     private Filesystem $filesystem;
-
-    public function __construct(string $template)
-    {
-        $this->viewPath = config('view.paths')[0].'/'.config('cms.frontend_views_path');
-        $this->bladeName = Str::slug($template).'.blade.php';
-        $this->adapter = new LocalFilesystemAdapter($this->viewPath);
-        $this->filesystem = new Filesystem($this->adapter);
-    }
 
     public function create(): bool
     {
@@ -27,7 +19,22 @@ class TemplateService
             return false;
         }
 
-        $this->filesystem->write($this->bladeName, '');
+        $adapter = new LocalFilesystemAdapter($this->viewPath);
+        (new Filesystem($adapter))
+            ->write($this->bladeName, '');
+
+        return true;
+    }
+
+    public function copy(string $template = 'index.blade.php'): bool
+    {
+        if($this->checkIfExist()) {
+            return false;
+        }
+
+        $adapter = new LocalFilesystemAdapter($this->viewPath);
+        (new Filesystem($adapter))
+            ->copy($template, $this->bladeName);
 
         return true;
     }
@@ -43,9 +50,33 @@ class TemplateService
             return false;
         }
 
+        $this->adapter = new LocalFilesystemAdapter($this->viewPath);
+        $this->filesystem = new Filesystem($this->adapter);
         $this->filesystem->delete($this->bladeName);
 
         return true;
+    }
+
+    public function getViewPath(): string
+    {
+        return $this->viewPath;
+    }
+
+    public function setViewPath(string $viewPath): TemplateService
+    {
+        $this->viewPath = config('view.paths')[0].'/'.$viewPath;
+        return $this;
+    }
+
+    public function getBladeName(): string
+    {
+        return $this->bladeName;
+    }
+
+    public function setBladeName(string $bladeName): TemplateService
+    {
+        $this->bladeName = Str::slug($bladeName).'.blade.php';
+        return $this;
     }
 
 }
