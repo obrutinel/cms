@@ -21,22 +21,14 @@
 @section('content')
     <div class="col-xl-12">
 
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
         <div class="card card-flush h-lg-100" id="kt_contacts_main">
             <div class="card-body pt-5">
 
                 <form id="kt_ecommerce_settings_general_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" method="POST" action="{{ route('settings.update', $setting) }}">
                     @csrf
                     @method('PUT')
+
+                    <input type="hidden" name="slug" value="{{ $setting->slug }}">
 
                     <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
                         <div class="col">
@@ -47,7 +39,7 @@
                                 <select class="form-control" name="group_id">
                                     <option value="0">--- Choisir ---</option>
                                     @foreach($groups as $group)
-                                        <option value="{{ $group->id }}" @selected($group->id == $group->parent_id)>
+                                        <option value="{{ $group->id }}" @selected($group->id == $setting->group_id)>
                                             {{ $group->name }}
                                         </option>
                                     @endforeach
@@ -77,19 +69,18 @@
                         <div class="col">
                             <div class="fv-row mb-7 fv-plugins-icon-container">
                                 <label class="fs-6 fw-semibold form-label mt-3">
-                                    <span>Type de champ</span> :
+                                    <span>Type de champ</span> : {{ $setting->type }}
                                 </label>
                                 <select class="form-control" name="type">
-                                    <option value="0">--- Choisir ---</option>
                                     @foreach(\App\Enums\InputType::cases() as $type)
-                                        <option value="{{ $type->value }}" @selected($type->value == $setting->type)>
+                                        <option value="{{ $type->value }}" @selected($type->value === $setting->type)>
                                             {{ $type->value }}
                                         </option>
                                     @endforeach
                                 </select>
                                 <div class="fv-plugins-message-container invalid-feedback">
                                     @error('type')
-                                    {{ $message }}
+                                        {{ $message }}
                                     @enderror
                                 </div>
                             </div>

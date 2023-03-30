@@ -34,9 +34,8 @@ class SettingController extends Controller
 
     public function update(Request $request, int $id): RedirectResponse
     {
-        $page = Setting::findOrFail($id);
-        $page->update($request->all());
-        $page->save();
+        (Setting::findOrFail($id))
+            ->update($request->all());
 
         return redirect()->route('settings.index')
             ->with('success', 'Le paramètre a bien été modifié');

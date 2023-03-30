@@ -21,21 +21,13 @@
 @section('content')
     <div class="col-xl-12">
 
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
         <div class="card card-flush h-lg-100" id="kt_contacts_main">
             <div class="card-body pt-5">
 
                 <form id="kt_ecommerce_settings_general_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" method="POST" action="{{ route('settings.store') }}">
                     @csrf
+
+                    <input type="hidden" name="slug" value="{{ old('slug') }}">
 
                     <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
                         <div class="col">

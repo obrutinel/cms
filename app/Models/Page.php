@@ -46,10 +46,10 @@ class Page extends Model
                 }
 
                 if($value === null) {
-                    return Str::of($attributes['title'])->slug();
+                    return Str::slug($attributes['title']);
                 }
 
-                return Str::of($value)->slug();
+                return Str::slug($value);
 
             }
         );

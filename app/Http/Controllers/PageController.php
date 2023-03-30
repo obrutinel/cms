@@ -32,7 +32,6 @@ class PageController extends Controller
 
     public function create(string $type, int $id = null): RedirectResponse
     {
-
         $page = Page::create([
             'title' => 'A remplir',
             'type' => $type,
@@ -74,7 +73,6 @@ class PageController extends Controller
 
         $page = Page::findOrFail($id);
         $page->update($validatedData);
-        $page->save();
 
         if($request->save == 'exit') {
             return redirect()->route('pages.list', $page->type)

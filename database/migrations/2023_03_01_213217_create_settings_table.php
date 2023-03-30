@@ -17,9 +17,10 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             $table->string('name');
-            $table->string('slug')->unique();
-            $table->text('value')->nullable();
             $table->string('type', 50)->default('text');
+            $table->string('slug')->nullable()->unique();
+            $table->text('value')->nullable();
+
         });
     }
 
