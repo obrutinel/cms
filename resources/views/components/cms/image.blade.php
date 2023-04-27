@@ -10,7 +10,7 @@
 
                     <div class="image-input image-input-outline" id="kt_image_input" data-kt-image-input="false">
 
-                        <a class="d-block overlay" data-fslightbox="lightbox-basic" href="{{ url('/upload/'.$page->image) }}">
+                        <a class="d-block overlay" href="{{ url('/upload/'.$page->image) }}">
                             <img src="{{ url('/upload/min_'.$page->image) }}" class="border radius" alt="">
                             <span class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
                                   data-kt-image-input-action="change"

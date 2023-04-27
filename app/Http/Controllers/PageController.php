@@ -17,7 +17,6 @@ class PageController extends Controller
             ->setBladeName($type)
             ->copy();
 
-
         $pages = Page::where('type', $type)
             ->paginate(10);
 
