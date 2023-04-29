@@ -40,6 +40,13 @@ return [
                     'width' => 800,
                     'height' => 600,
                 ],
+                'office' => [
+                    'label' => 'Photo',
+                    'help' => 'Taille minimum: 1300x500',
+                    'crop' => true,
+                    'width' => 1300,
+                    'height' => 500,
+                ],
             ],
         ],
 
@@ -90,6 +97,7 @@ return [
 
     ],
 
+    // Permet de customiser les pages liste
     'options_list' => [
         'types' => [
             'office' => [

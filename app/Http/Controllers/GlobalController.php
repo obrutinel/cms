@@ -24,16 +24,11 @@ class GlobalController extends Controller
 
     public function update(Request $request): RedirectResponse
     {
-        $data = [];
-
         foreach ($request['settings'] as $id => $value) {
-            $data[] = [
-                'id' => $id,
-                'value' => $value
-            ];
+            $setting = Setting::find($id);
+            $setting->value = $value;
+            $setting->save();
         }
-
-        Setting::upsert($data, ['id'], ['value']);
 
         return redirect()->route('globals.edit')
             ->with('success', 'Les paramètres ont bien été enregistrés');

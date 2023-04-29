@@ -31,13 +31,6 @@ class Setting extends Model
         );
     }
 
-    protected function slug(): Attribute
-    {
-        return Attribute::make(
-            set: fn () => !empty($this->attributes['name']) ? Str::slug($this->attributes['name'], '_'):null,
-        );
-    }
-
     public function group(): BelongsTo
     {
         return $this->belongsTo(GroupSetting::class);

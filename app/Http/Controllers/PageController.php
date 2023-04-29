@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdatePageRequest;
 use App\Models\Page;
+use App\Services\ImageService;
 use App\Services\TemplateService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class PageController extends Controller
@@ -46,54 +47,28 @@ class PageController extends Controller
     public function edit(int $id): View
     {
         return view('admin.pages.edit', [
-            'page' => Page::findOrFail($id),
-            'options' => config('cms')
+            'page' => Page::findOrFail($id)
         ]);
     }
 
-    public function update(Request $request, int $id): RedirectResponse
+    public function update(UpdatePageRequest $request, Page $page): RedirectResponse
     {
-        $validatedData = $request->validate([
-            'title' => 'required|max:255',
-            'excerpt' => 'sometimes',
-            'content' => 'sometimes',
-            'link_label' => 'sometimes',
-            'link_url' => 'sometimes',
-            'meta_title' => 'sometimes',
-            'meta_desc' => 'sometimes',
-            'is_publish' => 'sometimes|boolean',
-            'published_at' => 'sometimes|nullable|date_format:d/m/Y',
-            'slug' => 'sometimes|max:255|unique:pages,slug,'.$id,
-        ]);
-
-        if(!$request->has('is_publish')) {
-            $validatedData['is_publish'] = false;
-        }
-
-        $page = Page::findOrFail($id);
-        $page->update($validatedData);
+        $page->update($request->all());
 
         if($request->save == 'exit') {
             return redirect()->route('pages.list', $page->type)
                 ->with('success', 'La page a bien été modifiée');
         }
 
-        return redirect()->route('pages.edit', $id)
+        return redirect()->route('pages.edit', $page->id)
             ->with('success', 'La page a bien été modifiée');
     }
 
-    public function destroy(int $id): RedirectResponse
+    public function destroy(Page $page): RedirectResponse
     {
-        $page = Page::findOrFail($id);
+        (new ImageService($page))->delete();
 
-        if(!empty($page->image)) {
-            $path = public_path('upload/');
-            if(file_exists($path.$page->image)) {
-                unlink($path.$page->image);
-            }
-        }
-
-        Page::destroy($id);
+        Page::destroy($page->id);
 
         return redirect()->route('pages.list', [$page->type, $page->parent_id])
             ->with('success', 'La page a bien été supprimée');

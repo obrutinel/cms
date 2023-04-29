@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SettingRequest;
 use App\Models\GroupSetting;
 use App\Models\Setting;
 use Illuminate\Http\RedirectResponse;
@@ -24,23 +25,6 @@ class SettingController extends Controller
         ]);
     }
 
-    public function edit(int $id): View
-    {
-        return view('admin.settings.edit', [
-            'setting' => Setting::findOrFail($id),
-            'groups' => GroupSetting::all(),
-        ]);
-    }
-
-    public function update(Request $request, int $id): RedirectResponse
-    {
-        (Setting::findOrFail($id))
-            ->update($request->all());
-
-        return redirect()->route('settings.index')
-            ->with('success', 'Le paramètre a bien été modifié');
-    }
-
     public function store(Request $request): RedirectResponse
     {
         Setting::create($request->all());
@@ -49,9 +33,25 @@ class SettingController extends Controller
             ->with('success', 'Le paramètre a bien été ajoutée');
     }
 
-    public function destroy($id): RedirectResponse
+    public function edit(Setting $setting): View
     {
-        Setting::destroy($id);
+        return view('admin.settings.edit', [
+            'setting' => $setting,
+            'groups' => GroupSetting::all(),
+        ]);
+    }
+
+    public function update(SettingRequest $request, Setting $setting): RedirectResponse
+    {
+        $setting->update($request->all());
+
+        return redirect()->route('settings.index')
+            ->with('success', 'Le paramètre a bien été modifié');
+    }
+
+    public function destroy(Setting $setting): RedirectResponse
+    {
+        $setting->delete();
 
         return redirect()->route('settings.index')
             ->with('success', 'Le paramètre a bien été supprimée');
