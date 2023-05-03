@@ -27,6 +27,7 @@
                         <tr class="fw-bold text-muted bg-light">
                             <th class="ps-4 rounded-start">Nom</th>
                             <th class="ps-4">Valeur</th>
+                            <th class="ps-4">Type</th>
                             <th class="ps-4">Groupe</th>
                             <th class="text-end rounded-end pe-4">Actions</th>
                         </tr>
@@ -35,7 +36,8 @@
                     @foreach($settings as $setting)
                         <tr>
                             <td>{{ $setting->name }}</td>
-                            <td>{{ $setting->value }}</td>
+                            <td>{{ \Illuminate\Support\Str::limit($setting->value, 150) }}</td>
+                            <td>{{ $setting->type->value }}</td>
                             <td>
                                 @if($setting->group()->exists())
                                     {{ $setting->group->name }}

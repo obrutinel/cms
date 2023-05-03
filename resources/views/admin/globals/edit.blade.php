@@ -8,21 +8,6 @@
     </div>
 @endsection
 
-@section('buttons')
-    <div class="d-flex align-items-center gap-2 gap-lg-3">
-        <a href="{{ route('pages.index') }}" class="btn fw-bold btn-light">
-            <i class="fa-solid fa-rotate-left"></i> Retour
-        </a>
-        <button type="submit" name="save" value="exit" class="btn btn-light-primary">
-            <i class="fa-solid fa-check"></i> Enregistrer et sortir
-        </button>
-        <button type="submit" name="save" value="stay" class="btn btn-success">
-            <i class="fa-solid fa-check"></i> Enregistrer
-        </button>
-    </div>
-@endsection
-
-
 @section('content')
     <div class="col-xl-12">
 
@@ -37,16 +22,24 @@
                                 <div class="card mb-6">
                                     <div class="card-body pt-5">
 
-                                        <h2 class="mb-4">{{ $group->name }}</h2>
+                                        <h2 class="mb-6">{{ $group->name }}</h2>
                                         <div class="row">
 
                                             @foreach($group->settings as $setting)
                                                 <div class="col-12">
                                                     <div class="fv-row mb-7 fv-plugins-icon-container">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span>{{ $setting->name }}</span> :
-                                                        </label>
-                                                        <input type="{{ $setting->type }}" class="form-control form-control-solid" name="settings[{{ $setting->id }}]" value="{{ $setting->value }}">
+                                                        <label for="{{ $setting->slug }}" class="form-label">{{ $setting->name }} - {{ $setting->type }}</label>
+
+                                                        @if($setting->type->value == "text")
+                                                            <input type="text" class="form-control form-control-solid" name="settings[{{ $setting->id }}]" value="{{ $setting->value }}">
+                                                        @else
+                                                                <textarea
+                                                                        id="{{ $setting->slug }}"
+                                                                        class="form-control form-control form-control-solid"
+                                                                        name="settings[{{ $setting->id }}]"
+                                                                        data-kt-autosize="true">{{ $setting->value }}</textarea>
+                                                        @endif
+
                                                         @error('title')
                                                             <div class="fv-plugins-message-container invalid-feedback">
                                                                 {{ $message }}
@@ -64,9 +57,15 @@
 
                         @endforeach
 
-                            <button type="submit" class="btn btn-success">
-                                <i class="fa-solid fa-check"></i> Enregistrer
-                            </button>
+                        <div class="card">
+                            <div class="card-body py-5">
+                                <div class="d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fa-solid fa-check"></i> Enregistrer
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
 
                 </div>
             </form>
