@@ -22,20 +22,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
-    \UniSharp\LaravelFilemanager\Lfm::routes();
-});
-
 Route::middleware('auth')->prefix('admin')
     ->group(function () {
 
         Route::get('/', function () {
             return view('admin.layout');
         });
+
+        Route::get('/dashboard', function () {
+            return view('admin.dashboard');
+        })->name('dashboard');
 
         Route::resource('pages', PageController::class)->except('show');
         //Route::get('/pages/{page}/list', [PageController::class, 'index'])->name('pages.list');

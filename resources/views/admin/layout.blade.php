@@ -30,40 +30,41 @@
       data-kt-app-toolbar-enabled="true"
       class="app-default">
 
-<div class="d-flex flex-column flex-root app-root" id="kt_app_root">
-    <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
+    <div id="app">
+        <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
+            <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
 
-        @include('admin.header')
+                @include('admin.header')
 
-        <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
+                <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
 
-            @include('admin.sidebar')
+                    @include('admin.sidebar')
 
-            <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
-                <div class="d-flex flex-column flex-column-fluid">
+                    <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+                        <div class="d-flex flex-column flex-column-fluid">
 
-                    <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
-                        <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack my-2">
-                            @yield('breadcrumb')
-                            @yield('buttons')
-                        </div>
-                    </div>
+                            <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+                                <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack my-2">
+                                    @yield('breadcrumb')
+                                    @yield('buttons')
+                                </div>
+                            </div>
 
-                    <div id="kt_app_content" class="app-content flex-column-fluid">
-                        <div id="kt_app_content_container" class="app-container container-fluid">
-                            @include('admin.partials.flash')
-                            @yield('content')
+                            <div id="kt_app_content" class="app-content flex-column-fluid">
+                                <div id="kt_app_content_container" class="app-container container-fluid">
+                                    @include('admin.partials.flash')
+                                    @yield('content')
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
                 </div>
+
             </div>
-
         </div>
-
     </div>
-</div>
-
 <!--<script>var hostUrl = "assets/";</script>-->
 
 <script src="{{ asset('metronic/plugins/global/plugins.bundle.js') }}"></script>

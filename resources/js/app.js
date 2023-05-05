@@ -1,7 +1,8 @@
 import './bootstrap';
 
-import Alpine from 'alpinejs';
+import { createApp } from 'vue'
+import CardsIndex from './components/Cards/Index.vue'
 
-window.Alpine = Alpine;
-
-Alpine.start();
+createApp({})
+    .component('CardsIndex', CardsIndex)
+    .mount('#app')
